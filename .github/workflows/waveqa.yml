@@ -31,23 +31,14 @@ jobs:
           WAVEQA_ENCRYPTION_KEY: ${{ secrets.WAVEQA_ENCRYPTION_KEY }}
         run: node dist-cli/cli/waveqa.js decrypt .waveqa/waveqa.db.enc --output .waveqa/waveqa.db
 
-      - name: Start Android emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 33
-          target: google_apis
-          arch: x86_64
-          disable-animations: true
-
       - name: Run tests
         env:
           WAVEQA_DB_PATH: .waveqa/waveqa.db
-          DEVICE_SERIAL: ${{ secrets.DEVICE_SERIAL }}
         run: |
           node dist-cli/cli/waveqa.js run \
               --test all \
-              --device "$DEVICE_SERIAL" \
-              --platform android
+              --platform android \
+              --cloud browserstack
 
       - name: Upload test results (JSON)
         if: always()
