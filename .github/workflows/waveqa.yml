@@ -1,0 +1,70 @@
+name: WaveQA — Mobile Tests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  mobile-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CLI
+        run: npm run build:cli
+
+      - name: Decrypt test database
+        env:
+          WAVEQA_ENCRYPTION_KEY: ${{ secrets.WAVEQA_ENCRYPTION_KEY }}
+        run: node dist-cli/cli/waveqa.js decrypt .waveqa/waveqa.db.enc --output .waveqa/waveqa.db
+
+      - name: Start Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+
+      - name: Run tests
+        env:
+          WAVEQA_DB_PATH: .waveqa/waveqa.db
+          DEVICE_SERIAL: ${{ secrets.DEVICE_SERIAL }}
+        run: |
+          node dist-cli/cli/waveqa.js run \
+              --test all \
+              --device "$DEVICE_SERIAL" \
+              --platform android
+
+      - name: Upload test results (JSON)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: waveqa-results
+          path: ~/.waveqa/reports/**/*.json
+          retention-days: 30
+
+      - name: Upload full test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: waveqa-reports-${{ github.run_number }}
+          path: ~/.waveqa/reports/
+          retention-days: 30
+
+      - name: Clean up decrypted database
+        if: always()
+        run: rm -f .waveqa/waveqa.db

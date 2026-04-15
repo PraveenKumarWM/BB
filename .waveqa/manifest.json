@@ -1,0 +1,98 @@
+{
+  "pushed_at": "2026-04-15T09:10:36.134Z",
+  "project": "Brightbank",
+  "waveqa_version": "1.0.0",
+  "tests": [
+    {
+      "name": "Login with empty username and valid password",
+      "description": "Attempt to login leaving the username field empty but providing a valid password. Expects login to fail or show an error.",
+      "tags": []
+    },
+    {
+      "name": "Login with valid username and empty password",
+      "description": "Attempt to login with a valid username but leaving the password field empty. Expects login to fail or show an error.",
+      "tags": []
+    },
+    {
+      "name": "Successful Login and Dashboard verification",
+      "description": "Login with valid credentials and verify the dashboard loads correctly with user info and financial data.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard tab navigation - Accounts tab",
+      "description": "Navigate to the Accounts tab from the Dashboard using the bottom tab bar.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard tab navigation - Cards tab",
+      "description": "Navigate to the Cards tab from the Dashboard using the bottom tab bar.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard tab navigation - Spends tab",
+      "description": "Navigate to the Spends tab from the Dashboard using the bottom tab bar.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard carousel swipe and BOOK FD interaction",
+      "description": "Verify carousel content and tap BOOK FD button on the dashboard.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard Accounts Summary display verification",
+      "description": "Verify accounts summary tile shows correct balance and number of accounts.",
+      "tags": []
+    },
+    {
+      "name": "Navigate to Notifications screen and verify ACCOUNT tab",
+      "description": "Open notifications from the navbar and verify Account notifications are shown.",
+      "tags": []
+    },
+    {
+      "name": "Switch to OFFERS & UPDATES notification tab",
+      "description": "Switch to the OFFERS & UPDATES tab on the Notifications screen.",
+      "tags": []
+    },
+    {
+      "name": "View Profile screen and verify user details",
+      "description": "Navigate to the Profile screen and verify all user profile information is displayed correctly.",
+      "tags": []
+    },
+    {
+      "name": "Logout flow - Cancel logout via NO button",
+      "description": "Initiate logout from Profile screen and cancel by tapping NO in the confirmation dialog.",
+      "tags": []
+    },
+    {
+      "name": "Logout flow - Confirm logout via YES button",
+      "description": "Initiate logout from Profile screen and confirm by tapping YES in the confirmation dialog.",
+      "tags": []
+    },
+    {
+      "name": "Logout dialog close via X button",
+      "description": "Open the logout dialog and close it using the close (X) button.",
+      "tags": []
+    },
+    {
+      "name": "Login screen - Register as new user button",
+      "description": "Verify the REGISTER AS NEW USER button is visible on the login screen and tap it.",
+      "tags": []
+    },
+    {
+      "name": "Login with empty username and empty password",
+      "description": "Attempt to login with both username and password fields empty. Expects login to fail.",
+      "tags": []
+    },
+    {
+      "name": "Dashboard - Total Investments display verification",
+      "description": "Verify Total Investments amount is shown correctly on the dashboard.",
+      "tags": []
+    },
+    {
+      "name": "Notifications screen - Navigate back to Dashboard",
+      "description": "From the Notifications screen, tap the Dashboard tab to return to Dashboard.",
+      "tags": []
+    }
+  ],
+  "suites": []
+}
